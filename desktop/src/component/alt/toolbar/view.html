@@ -1,0 +1,11 @@
+<div class="breadcrumbs">
+    <div class="container-fluid">
+        <h2 class="breadcrumbs-title">{{ title }}</h2>
+        <ol class="breadcrumbs-list">
+            <li data-ng-repeat="item in breadcrumb" data-ng-class="{true: 'active'}[item.isactive]">
+                <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>
+                <span data-ng-if="item.isactive">{{ item.title }}</span>
+            </li>
+        </ol>
+    </div>
+</div>
