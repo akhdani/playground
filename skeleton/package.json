@@ -1,0 +1,37 @@
+{
+  "name": "playground-skeleton",
+  "version": "1.0.0",
+  "description": "Playground Skeleton Application",
+  "main": "app/desktop.js",
+  "scripts": {
+    "postinstall": "gulp bower",
+    "start": "gulp serve",
+    "compile": "rd /s /q app && gulp compile",
+    "build": "node build.js",
+    "release": "npm run compile && npm run build"
+  },
+  "devDependencies": {
+    "bower": "^1.5.2",
+    "cross-env": "^1.0.7",
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "1.0.1",
+    "glob": "^7.0.0",
+    "gulp": "^3.9.0",
+    "gulp-bower": "^0.0.10",
+    "gulp-clean-css": "^2.0.9",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-js-obfuscator": "^1.0.0",
+    "ncp": "^2.0.0",
+    "shelljs": "^0.6.0"
+  },
+  "build": {
+    "app-bundle-id": "labs.akhdani",
+    "app-category-type": "labs.akhdani.playground.skeleton"
+  },
+  "keywords": [
+    "playground"
+  ],
+  "dependencies": {
+    "electron-connect": "^0.4.2"
+  }
+}
