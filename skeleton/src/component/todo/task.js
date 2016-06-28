@@ -6,9 +6,12 @@ define([
             pkey: "taskid",
             autoinc: true,
             fields: {
-                "taskid": $dbo.INTEGER,
-                "description": $dbo.STRING,
-                "deadline": $dbo.DATE_TIME
+                taskid: $dbo.INTEGER,
+                title: $dbo.STRING,
+                description: $dbo.STRING,
+                deadline: $dbo.DATE_TIME,
+                tagid: $dbo.INTEGER,
+                projectid: $dbo.INTEGER
             }
         });
 

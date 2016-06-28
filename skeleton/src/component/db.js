@@ -10,11 +10,14 @@ define([
 
             // create table
             var table = $db.schema_builder.createTable(res.tablename);
-
+            
             // set fields
             res.schema.fields = res.schema.fields || [];
             angular.forEach(res.schema.fields, function(val, key){
                 table.addColumn(key, val);
+
+                if(!res.schema.pkey || (res.schema.pkey && key != res.schema.pkey))
+                    table.addNullable([key]);
             });
 
             // set pkey
@@ -52,6 +55,86 @@ define([
                             });
                             break;
                         case "where":
+                            switch(typeof data.where){
+                                case "string":
+                                    var tmp = data.where.split(" "),
+                                        key = tmp[0] + "",
+                                        operator = tmp[1] + "",
+                                        value = (tmp[2] + "").split("'").join("");
+
+                                    switch(operator.toLowerCase()){
+                                        case "=":
+                                            operator = "eq";
+                                            break;
+                                        case "<>":
+                                            operator = "neq";
+                                            break;
+                                        case ">":
+                                            operator = "gt";
+                                            break;
+                                        case "<":
+                                            operator = "lt";
+                                            break;
+                                        case ">=":
+                                            operator = "gte";
+                                            break;
+                                        case "<=":
+                                            operator = "lte";
+                                            break;
+                                        case "in":
+                                            operator = "in";
+                                            break;
+                                        case "like":
+                                        default:
+                                            operator = "match";
+                                            value = new RegExp(value, "i");
+                                            break;
+                                    }
+
+                                    if(table[key])
+                                        res.where.push(table[key][operator](value));
+                                    break;
+                                case "object":
+                                    angular.forEach(data.where, function(val, key){
+                                        var tmp = val.split(" "),
+                                            key = tmp[0] + "",
+                                            operator = tmp[1] + "",
+                                            value = (tmp[2] + "").split("'").join("");
+
+                                        switch(operator.toLowerCase()){
+                                            case "=":
+                                                operator = "eq";
+                                                break;
+                                            case "<>":
+                                                operator = "neq";
+                                                break;
+                                            case ">":
+                                                operator = "gt";
+                                                break;
+                                            case "<":
+                                                operator = "lt";
+                                                break;
+                                            case ">=":
+                                                operator = "gte";
+                                                break;
+                                            case "<=":
+                                                operator = "lte";
+                                                break;
+                                            case "in":
+                                                operator = "in";
+                                                break;
+                                            case "like":
+                                            default:
+                                                operator = "match";
+                                                value = new RegExp(value, "i");
+                                                break;
+                                        }
+
+                                        if(table[key])
+                                            res.where.push(table[key][operator](value));
+                                    });
+                                    break;
+                            }
                             break;
                         case "limit":
                             res.limit = parseInt(data.limit);
@@ -76,7 +159,7 @@ define([
                             if(table[key]){
                                 tmp = (val + "").split(" ");
                                 var operator = tmp.length > 1 && ["=", "<>", ">", "<", ">=", "<=", "in", "like"].indexOf(tmp[0]) > -1 ? tmp[0] : "like",
-                                    value = tmp.length > 1 ? (tmp[1] + "").split("'").join("") : tmp[0];
+                                    value = (tmp.length > 1 ? (tmp[1] + "").split("'").join("") : tmp[0]) + "";
 
                                 switch(operator.toLowerCase()){
                                     case "=":
@@ -103,10 +186,11 @@ define([
                                     case "like":
                                     default:
                                         operator = "match";
+                                        value = new RegExp(value, "i");
                                         break;
                                 }
 
-                                res.where.push(table[key][operator](value + ""));
+                                res.where.push(table[key][operator](value));
                             }
                             break;
                     }

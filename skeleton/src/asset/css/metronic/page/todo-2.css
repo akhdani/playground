@@ -1,5 +1,5 @@
 /***
-TODO Page
+Page
 ***/
 /* Cubic Bezier Transition */
 .todo-sidebar {
@@ -45,6 +45,10 @@ TODO Page
 
 .todo-tasklist {
   padding: 0; }
+
+.todo-project-list ul li {
+  min-height: 50px;
+}
 
 .todo-project-list ul li a {
   font-size: 14px !important;
@@ -209,12 +213,12 @@ div .todo-tasklist-item:hover {
   .todo-content {
     overflow: visible; } }
 
-.todo-tasklist-devider {
+.todo-tasklist-divider {
   display: none; }
 
 @media (max-width: 767px) {
   /* 767px */
-  .todo-tasklist-devider {
+  .todo-tasklist-divider {
     display: block;
     height: 20px;
     margin: 20px -10px;

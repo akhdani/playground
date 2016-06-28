@@ -38,13 +38,6 @@ const pack = function(platform, arch, callback) {
     const opts = Object.assign({}, DEFAULT_OPTS, iconObj, { platform, arch });
     packager(opts, (err, filepath) => {
         if (err) return console.error(err);
-
-        console.log(`${platform}-${arch} copying apps!`);
-        ncp("apps/", DEFAULT_OPTS.out + "\\" + DEFAULT_OPTS.name + "-" + platform + "-" + arch + "\\apps", function(err){
-            if (err) return console.error("here", err);
-
-            console.log(`${platform}-${arch} finished!`);
-        });
     });
 };
 
@@ -52,5 +45,5 @@ exec("rd /s /q build\\v" + pkg.version);
 // pack("darwin", "x64");
 // pack("linux",  "ia32");
 // pack("linux",  "x64");
-// pack("win32",  "ia32");
+pack("win32",  "ia32");
 pack("win32",  "x64");

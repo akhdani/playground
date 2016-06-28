@@ -6,8 +6,8 @@ define([
             pkey: "tagid",
             autoinc: true,
             fields: {
-                "tagid": $dbo.INTEGER,
-                "title": $dbo.STRING
+                tagid: $dbo.INTEGER,
+                title: $dbo.STRING
             }
         });
 

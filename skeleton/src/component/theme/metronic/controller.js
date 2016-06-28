@@ -5,7 +5,7 @@ define([
         $scope.layout = "";
         $scope.color = "default";
         $scope.template = "full";
-
+        
         $("body").addClass("page-header-fixed page-sidebar-closed-hide-logo page-content-white");
 
         $scope.view = function(){
