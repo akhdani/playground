@@ -1,5 +1,5 @@
 define([
-    "component/dbo"
+
 ], function(){
     alt.factory("Todo_Project", ["$log", "$dbo", function($log, $dbo){
         var dbo = $dbo("todo/project", {

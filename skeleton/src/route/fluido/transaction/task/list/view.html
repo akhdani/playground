@@ -1,0 +1,128 @@
+<div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+
+<div data-alt-transclude="alt/table" data-scope="table" style="overflow-x: auto">
+    <div class="table-responsive">
+        <table class="table table-hover table-responsive table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th class="text-center" data-ng-click="table.sort('deploymentid')">
+                        Deployment ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['deploymentid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['deploymentid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('processid')">
+                        Process ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['processid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['processid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('trxprocessid')">
+                        Transaction Process ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['trxprocessid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['trxprocessid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('taskid')">
+                        Task ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['taskid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['taskid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('trxtaskid')">
+                        Transaction Task ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['trxtaskid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['trxtaskid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('name')">
+                        Name
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['name'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['name'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('rev')">
+                        Revision Number
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['rev'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['rev'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('type')">
+                        Type
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['type'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['type'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('subtype')">
+                        Subtype
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['subtype'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['subtype'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('status')">
+                        Status
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['status'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['status'] === false"></i>
+                    </th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.deploymentid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.processid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.trxprocessid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.taskid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.trxtaskid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.name"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.rev"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.type"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.subtype"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.status"/></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="v in table.data">
+                    <td style="text-align: right;">{{$index + (table.offset || 0) + 1}}.</td>
+                    <td>{{v.deploymentid}}</td>
+                    <td>{{v.processid}}</td>
+                    <td>{{v.trxprocessid}}</td>
+                    <td>{{v.taskid}}</td>
+                    <td>{{v.trxtaskid}}</td>
+                    <td>{{v.name}}</td>
+                    <td>{{v.rev}}</td>
+                    <td>{{v.type}}</td>
+                    <td>{{v.subtype}}</td>
+                    <td>{{v.status}}</td>
+                    <td class="text-center" style="white-space:nowrap" data-ng-init="buttons = table.buttons($index, v);">
+                        <div data-ng-repeat="button in buttons" style="display: inline;">
+                            <div data-alt-component="alt/button" data-scope="button"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div data-alt-transclude="alt/modal" data-scope="modal">
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-sm-12">
+            <div data-alt-component="alt/button" data-scope="modal.buttonadd" class="pull-right"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover table-responsive table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th class="text-center">Field</th>
+                    <th class="text-center">Content</th>
+                    <th style="width: 50px;" class="text-center">Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="v in modal.data.variable">
+                    <td><input class="form-control" type="text" data-ng-model="v.field"></td>
+                    <td><input class="form-control" type="text" data-ng-model="v.content"></td>
+                    <td class="text-center" style="white-space:nowrap" data-ng-init="buttondel = modal.buttondel($index, v);">
+                        <div data-alt-component="alt/button" data-scope="buttondel"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
