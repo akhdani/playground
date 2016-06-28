@@ -1,9 +1,9 @@
 define([
 
 ], function(){
-    return ["$scope", "$log", "$timeout", "$interval", "$rootScope", function($scope, $log, $timeout, $interval, $rootScope){
-        $scope.layout = "layout1";
-        $scope.theme = "default";
+    return ["$scope", "$log", "$timeout", "$interval", "$rootScope", "$loading", function($scope, $log, $timeout, $interval, $rootScope, $loading){
+        $scope.layout = "";
+        $scope.color = "default";
         $scope.template = "full";
 
         $("body").addClass("page-header-fixed page-sidebar-closed-hide-logo page-content-white");

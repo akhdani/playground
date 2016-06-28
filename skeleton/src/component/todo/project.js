@@ -7,7 +7,8 @@ define([
             autoinc: true,
             fields: {
                 projectid: $dbo.INTEGER,
-                title: $dbo.STRING
+                title: $dbo.STRING,
+                total_task: $dbo.NUMBER
             }
         });
 

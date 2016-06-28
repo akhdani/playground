@@ -313,7 +313,7 @@ define([
                         query;
 
                     // select
-                    query = $db.connection.delete.from(table);
+                    query = $db.connection.delete().from(table);
 
                     if(parser.where){
                         query.where(parser.where);

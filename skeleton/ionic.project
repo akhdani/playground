@@ -1,0 +1,9 @@
+{
+  "name": "prototyper-skeleton",
+  "app_id": "",
+  "documentRoot": "src",
+  "watchPatterns": [
+    "src/**/*",
+    "www/**/*"
+  ]
+}

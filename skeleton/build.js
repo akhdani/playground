@@ -3,7 +3,7 @@
 require("shelljs/global");
 const ncp = require("ncp");
 const packager = require("electron-packager");
-const pkg = require(`./package.json`);
+const pkg = require("./package.json");
 const devDeps = Object.keys(pkg.devDependencies);
 
 const DEFAULT_OPTS = {
@@ -11,7 +11,7 @@ const DEFAULT_OPTS = {
     name:  pkg.name.substr(0, 1).toUpperCase() + pkg.name.substr(1),
     asar:  true,
     prune: true,
-    out:   `build/v${pkg.version}`,
+    out:   "build/v" + pkg.version,
     "app-version": pkg.version,
     ignore: [
         "bower.json",
@@ -22,9 +22,9 @@ const DEFAULT_OPTS = {
     ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
 };
 
-const pack = (platform, arch, callback) => {
+const pack = function(platform, arch, callback) {
     const iconObj = {
-        icon: "src/favicon" + (() => {
+        icon: "src/favicon" + (function() {
             let extension = ".png";
             if (platform === "darwin") {
                 extension = ".icns";

@@ -1,81 +1,35 @@
-<link type="text/css" rel="stylesheet" media="all" href="asset/css/todo-2.css">
+<link type="text/css" rel="stylesheet" media="all" href="asset/css/metronic/page/todo-2.css">
 
 <div class="row">
     <div class="col-md-12">
         <div class="todo-ui">
             <div class="todo-sidebar">
-                <div class="portlet light ">
+                <div class="portlet light">
                     <div class="portlet-title">
                         <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
                             <span class="caption-subject font-green-sharp bold uppercase">PROJECTS </span>
                             <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
                         </div>
                         <div class="actions">
-                            <div class="btn-group">
-                                <a class="btn green btn-circle btn-outline btn-sm todo-projects-config" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
-                                    <i class="icon-settings"></i> &nbsp;
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;"> New Project </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Pending
-                                            <span class="badge badge-danger"> 4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Completed
-                                            <span class="badge badge-success"> 12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> Overdue
-                                            <span class="badge badge-warning"> 9 </span>
-                                        </a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="javascript:;"> Archived Projects </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <div data-alt-component="alt/button" data-scope="project.add"></div>
                         </div>
                     </div>
-                    <div class="portlet-body todo-project-list-content" style="height: auto;">
+                    <div class="portlet-body todo-project-list-content">
                         <div class="todo-project-list">
                             <ul class="nav nav-stacked">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-info"> 6 </span> AirAsia Ads </a>
+                                <li data-ng-if="project.list.length == 0">
+                                    <h4>No project here, let's create new!</h4>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-success"> 2 </span> HSBC Promo </a>
-                                </li>
-                                <li class="active">
-                                    <a href="javascript:;">
-                                        <span class="badge badge-success"> 3 </span> GlobalEx</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-default"> 14 </span> Empire City </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-info"> 6 </span> AirAsia Ads </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-danger"> 2 </span> Loop Inc Promo </a>
+                                <li data-ng-repeat="item in project.list" data-ng-init="button = project.button($index, item);">
+                                    {{ item.title }}
+                                    <div class="pull-right" data-ng-repeat="btn in button" data-alt-component="alt/button" data-scope="btn"></div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="portlet light ">
+
+                <div class="portlet light">
                     <div class="portlet-title">
                         <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content-tags">
                             <span class="caption-subject font-red bold uppercase">TAGS </span>
@@ -83,39 +37,26 @@
                         </div>
                         <div class="actions">
                             <div class="actions">
-                                <a class="btn btn-circle grey-salsa btn-outline btn-sm" href="javascript:;">
-                                    <i class="fa fa-plus"></i> Add </a>
+                                <div data-alt-component="alt/button" data-scope="tag.add"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="portlet-body todo-project-list-content todo-project-list-content-tags" style="height: auto;">
+                    <div class="portlet-body todo-project-list-content todo-project-list-content-tags">
                         <div class="todo-project-list">
                             <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-danger"> 6 </span> Pending </a>
+                                <li data-ng-if="tag.list.length == 0">
+                                    <h4>No tag here, let's create new!</h4>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-info"> 2 </span> Completed </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-success"> 14 </span> In Progress </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-warning"> 6 </span> Closed </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge badge-info"> 2 </span> Delivered </a>
+                                <li data-ng-repeat="item in tag.list" data-ng-init="button = tag.button($index, item);">
+                                    {{ item.title }}
+                                    <div class="pull-right" data-ng-repeat="btn in button" data-alt-component="alt/button" data-scope="btn"></div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- END TODO SIDEBAR -->
             <!-- BEGIN TODO CONTENT -->
             <div class="todo-content">

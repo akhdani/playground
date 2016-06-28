@@ -7,37 +7,10 @@
 
     <link type="text/css" rel="stylesheet" media="all" href="asset/lib/bootstrap/dist/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" media="all" href="asset/lib/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" media="all" href="asset/css/components.css">
-    <link type="text/css" rel="stylesheet" media="all" href="asset/css/plugins.css">
+    <link type="text/css" rel="stylesheet" media="all" href="asset/css/custom.css">
 
     <link rel="shortcut icon" href="favicon.ico">
-    <script>
-        if (window.require) {
-            require("./renderer.js");
-
-            // handle node's require and requirejs
-            window.nodeRequire = window.require;
-            delete window.require;
-
-            // load jquery
-            window.$ = window.jQuery = window.nodeRequire('./asset/lib/jquery/dist/jquery.js');
-
-            // load electron
-            window.electron = window.nodeRequire("electron");
-
-            // open external link to new browser
-            var shell = window.electron.shell;
-            $(document).on('click', 'a[href^="http"]', function(event) {
-                event.preventDefault();
-                shell.openExternal(this.href);
-            });
-        }
-    </script>
-    <style>
-        .ng-cloak{
-            display: none;
-        }
-    </style>
+    <script type="text/javascript" src="init.js"></script>
 </head>
 <body class="ng-cloak">
     <div data-alt-component="theme/metronic" data-scope="theme"></div>
@@ -53,7 +26,6 @@
     <div data-alt-component="alt/popup" data-scope="$popup"></div>
 
     <script type="text/javascript" src="asset/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="asset/js/cubeportfolio/js/jquery.cubeportfolio.js"></script>
     <script type="text/javascript" src="asset/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="asset/lib/alt-angularjs/dist/alt.bundle.js"></script>
     <script type="text/javascript" src="config.js"></script>
