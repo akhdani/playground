@@ -133,6 +133,9 @@ define([
                 param.order += (param.order == "" ? "" : ", ") + key + " " + (val === true ? "asc" : "desc");
             });
 
+            if(param.order == "")
+                delete param.order;
+
             if ($scope.isloading != null && $scope.isloading.abort)
                 $scope.isloading.abort();
 

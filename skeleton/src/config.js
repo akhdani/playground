@@ -8,4 +8,9 @@ alt.run(["$rootScope", "$log", "$loading", "$timeout", function($rootScope, $log
         color: "darkblue",
         template: "content"
     };
+
+    $rootScope.$on("$routeChangeStart", function(event, current, next){
+        if(current.params && current.params.altmodule == "fluido")
+            alt.menu = "menu/fluido.html";
+    });
 }]);

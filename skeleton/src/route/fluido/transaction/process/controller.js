@@ -1,8 +1,8 @@
 define([
-    "component/explorer/transaction/process"
+    "component/fluido/transaction/process"
 ], function(){
-    return ["$scope", "$auth", "$log", "$button", "$window", "$alert","Explorer_Trx_Process",
-        function($scope, $auth, $log, $button, $window, $alert, Explorer_Trx_Process){
+    return ["$scope", "$auth", "$log", "$button", "$window", "$alert","Fluido_Transaction_Process",
+        function($scope, $auth, $log, $button, $window, $alert, Fluido_Transaction_Process){
             $scope.toolbar = {
                 title: "Transaction Process",
                 description: "Running process",
@@ -24,7 +24,7 @@ define([
                         $scope.table.isloading.abort();
 
                     // kirim data ke server
-                    $scope.table.isloading = Explorer_Trx_Process.table(params);
+                    $scope.table.isloading = Fluido_Transaction_Process.table(params);
                     $scope.table.isloading.then(function(response){
                         $scope.table.total = response.data.total;
                         $scope.table.data = response.data.list;

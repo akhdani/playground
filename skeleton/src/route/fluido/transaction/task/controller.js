@@ -1,9 +1,9 @@
 define([
-    "component/explorer/transaction/process",
-    "component/explorer/transaction/task"
+    "component/fluido/transaction/process",
+    "component/fluido/transaction/task"
 ], function(){
-    return ["$scope", "$auth", "$log", "$window", "$routeParams", "$button", "$alert", "Explorer_Trx_Process", "Explorer_Trx_Task",
-        function($scope, $auth, $log, $window, $routeParams, $button, $alert, Explorer_Trx_Process, Explorer_Trx_Task){
+    return ["$scope", "$auth", "$log", "$window", "$routeParams", "$button", "$alert", "Fluido_Transaction_Process", "Fluido_Transaction_Task",
+        function($scope, $auth, $log, $window, $routeParams, $button, $alert, Fluido_Transaction_Process, Fluido_Transaction_Task){
             $scope.toolbar = {
                 title: "Transaction Task",
                 description: "Running task",
@@ -28,7 +28,7 @@ define([
                         $scope.table.isloading.abort();
 
                     // kirim data ke server
-                    $scope.table.isloading = Explorer_Trx_Task.table(params);
+                    $scope.table.isloading = Fluido_Transaction_Task.table(params);
                     $scope.table.isloading.then(function(response){
                         $scope.table.total = response.data.total;
                         $scope.table.data = response.data.list;
@@ -61,7 +61,7 @@ define([
                                             trxtaskid: item.trxtaskid,
                                             rev: item.rev
                                         };
-                                        Explorer_Trx_Task.complete(task).then(function(response){
+                                        Fluido_Transaction_Task.complete(task).then(function(response){
                                             $alert.add("Task has been successfully completed!", $alert.success);
                                             $scope.table.reload($scope.table.params());
                                         });
@@ -90,7 +90,7 @@ define([
                                     icon: "fa fa-rotate-left",
                                     class: "btn btn-sm btn-danger",
                                     onclick: function(){
-                                        Explorer_Trx_Process.revert({trxprocessid: item.trxprocessid, rev: item.rev, trxtaskid: item.trxtaskid}).then(function(response){
+                                        Fluido_Transaction_Process.revert({trxprocessid: item.trxprocessid, rev: item.rev, trxtaskid: item.trxtaskid}).then(function(response){
                                             $alert.add("Process successfully reverted!", $alert.success);
                                             $scope.table.reload($scope.table.params());
                                         });
@@ -112,8 +112,8 @@ define([
                 class : "modal-lg",
                 open  : function(){
                     // get variable from server
-                    Explorer_Trx_Task.retrieve({trxtaskid: $scope.modal.data.trxtaskid}).then(function(response){
-                        $scope.modal.data.variable = Explorer_Trx_Task.restoreVariables(response.data.variable);
+                    Fluido_Transaction_Task.retrieve({trxtaskid: $scope.modal.data.trxtaskid}).then(function(response){
+                        $scope.modal.data.variable = Fluido_Transaction_Task.restoreVariables(response.data.variable);
                     });
 
                     $scope.modal.isshow = true;
@@ -150,9 +150,9 @@ define([
                                 trxtaskid: $scope.modal.data.trxtaskid,
                                 rev: $scope.modal.data.rev,
                                 force: $scope.modal.data.force || 0,
-                                variable: Explorer_Trx_Task.convertVariables($scope.modal.data.variable)
+                                variable: Fluido_Transaction_Task.convertVariables($scope.modal.data.variable)
                             };
-                            Explorer_Trx_Task.save(task).then(function(response){
+                            Fluido_Transaction_Task.save(task).then(function(response){
                                 $alert.add("Variables has been successfully added to the task!", $alert.success);
                                 $scope.table.reload($scope.table.params());
                                 $scope.modal.close();

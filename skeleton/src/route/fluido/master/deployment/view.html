@@ -2,7 +2,8 @@
 
 <div class="row" style="margin-bottom: 15px;">
     <div class="col-md-12">
-        <div data-alt-component="alt/button" data-scope="newDeployment" class="pull-right"></div>
+        <div data-alt-component="alt/button" data-scope="btnclear" class="pull-right"></div>
+        <div data-alt-component="alt/button" data-scope="btnadd" class="pull-right"></div>
     </div>
 </div>
 <div class="row">
@@ -12,11 +13,6 @@
                 <thead>
                 <tr>
                     <th style="width: 15px;">No.</th>
-                    <th style="width: 150px;" class="text-center" data-ng-click="table.sort('deploymentid')">
-                        Deployment ID
-                        <i class="fa fa-chevron-up" data-ng-if="table.order['deploymentid'] === true"></i>
-                        <i class="fa fa-chevron-down" data-ng-if="table.order['deploymentid'] === false"></i>
-                    </th>
                     <th class="text-center" data-ng-click="table.sort('name')">
                         Name
                         <i class="fa fa-chevron-up" data-ng-if="table.order['name'] === true"></i>
@@ -27,29 +23,20 @@
                         <i class="fa fa-chevron-up" data-ng-if="table.order['description'] === true"></i>
                         <i class="fa fa-chevron-down" data-ng-if="table.order['description'] === false"></i>
                     </th>
-                    <th class="text-center" data-ng-click="table.sort('bpmn')">
-                        BPMN File Path
-                        <i class="fa fa-chevron-up" data-ng-if="table.order['bpmn'] === true"></i>
-                        <i class="fa fa-chevron-down" data-ng-if="table.order['bpmn'] === false"></i>
-                    </th>
                     <th class="text-center">Actions</th>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="text" class="form-control" data-ng-model="table.filter.deploymentid"/></td>
                     <td><input type="text" class="form-control" data-ng-model="table.filter.name"/></td>
                     <td><input type="text" class="form-control" data-ng-model="table.filter.description"/></td>
-                    <td><input type="text" class="form-control" data-ng-model="table.filter.bpmn"/></td>
                     <td></td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="item in table.data">
                     <td style="text-align: right;">{{$index + (table.offset || 0) + 1}}.</td>
-                    <td>{{item.deploymentid}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.description}}</td>
-                    <td><a target="_blank" href="{{ alt.serverUrl + item.bpmn}}">{{alt.serverUrl + item.bpmn}}</a></td>
                     <td class="text-center" style="white-space:nowrap" data-ng-init="buttons = table.buttons($index, item);">
                         <div data-ng-repeat="button in buttons" style="display: inline;">
                             <div data-alt-component="alt/button" data-scope="button"></div>

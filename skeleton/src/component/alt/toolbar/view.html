@@ -1,11 +1,20 @@
-<div class="breadcrumbs">
-    <div class="container-fluid">
-        <h2 class="breadcrumbs-title">{{ title }}</h2>
-        <ol class="breadcrumbs-list">
-            <li data-ng-repeat="item in breadcrumb" data-ng-class="{true: 'active'}[item.isactive]">
-                <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>
-                <span data-ng-if="item.isactive">{{ item.title }}</span>
-            </li>
-        </ol>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li data-ng-repeat="item in breadcrumb">
+            <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>
+            <span data-ng-if="item.isactive">{{ item.title }}</span>
+            <i data-ng-if="!$last" class="fa fa-circle"></i>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm">
+            <i class="fa fa-calendar"></i>
+            <span class="thin uppercase hidden-xs">{{ moment(time).format("DD MMMM YYYY, HH:mm:ss") }}</span>&nbsp;
+        </div>
     </div>
 </div>
+
+<h3 class="page-title">
+    {{ title }}
+    <small>{{ description }}</small>
+</h3>

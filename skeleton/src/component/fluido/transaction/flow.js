@@ -11,8 +11,8 @@ define([
                 trxprocessid: $dbo.INTEGER,
                 processid: $dbo.INTEGER,
                 deploymentid: $dbo.INTEGER,
-                trxsource: $dbo.STRING,
-                trxtarget: $dbo.STRING
+                trxtasksource: $dbo.INTEGER,
+                trxtasktarget: $dbo.INTEGER
             }
         });
     }]);
