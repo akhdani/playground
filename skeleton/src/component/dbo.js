@@ -31,6 +31,10 @@ define([
             });
 
             // function needed
+            res.quote = function(data){
+                return "'" + data + "'";
+            };
+
             res.count = function(data){
                 return alt.serverUrl ? res.api.count(data) : res.db.count(data);
             };
