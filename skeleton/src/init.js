@@ -1,6 +1,7 @@
-if (window.require) {
-    require("./renderer.js");
-
+(function(){
+    if (!window.require)
+        return;
+    
     // handle node's require and requirejs
     window.nodeRequire = window.require;
     delete window.require;
@@ -17,4 +18,4 @@ if (window.require) {
         event.preventDefault();
         shell.openExternal(this.href);
     });
-}
+})();

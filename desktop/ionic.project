@@ -1,0 +1,9 @@
+{
+  "name": "playground",
+  "app_id": "",
+  "documentRoot": "src",
+  "watchPatterns": [
+    "src/**/*",
+    "www/**/*"
+  ]
+}

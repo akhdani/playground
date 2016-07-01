@@ -1,0 +1,75 @@
+<div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12">
+        <div data-alt-component="alt/button" data-scope="btnclear" class="pull-right"></div>
+        <div data-alt-component="alt/button" data-scope="btnadd" class="pull-right"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div data-alt-transclude="alt/table" data-scope="table">
+            <table class="table table-hover table-responsive table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th style="width: 15px;">No.</th>
+                    <th class="text-center" data-ng-click="table.sort('name')">
+                        Name
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['name'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['name'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('description')">
+                        Description
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['description'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['description'] === false"></i>
+                    </th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.name"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.description"/></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in table.data">
+                    <td style="text-align: right;">{{$index + (table.offset || 0) + 1}}.</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td class="text-center" style="white-space:nowrap" data-ng-init="buttons = table.buttons($index, item);">
+                        <div data-ng-repeat="button in buttons" style="display: inline;">
+                            <div data-alt-component="alt/button" data-scope="button"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div data-alt-transclude="alt/modal" data-scope="modal">
+    <div class="container-fluid">
+        <form class="form-horizontal" name="form">
+            <div class="form-group">
+                <label class="col-lg-2 col-md-3 col-sm-2 control-label">Name</label>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <input type="text" class="form-control" data-ng-model="modal.data.name"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-md-3 col-sm-2 control-label">BPMN</label>
+                <div class="col-lg-10 col-md-6 col-sm-10">
+                    <div data-alt-component="alt/file" data-scope="bpmn"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-md-3 col-sm-2 control-label">Description</label>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <textarea class="form-control" data-ng-model="modal.data.description"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

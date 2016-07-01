@@ -20,9 +20,7 @@
     "gulp-bower": "^0.0.10",
     "gulp-clean-css": "^2.0.9",
     "gulp-htmlmin": "^2.0.0",
-    "gulp-js-obfuscator": "^1.0.0",
-    "ncp": "^2.0.0",
-    "shelljs": "^0.6.0"
+    "gulp-js-obfuscator": "^1.0.0"
   },
   "build": {
     "app-bundle-id": "labs.akhdani",

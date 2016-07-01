@@ -1,7 +1,7 @@
 define([
     
 ], function(){
-    alt.factory("$db", ["$log", "$q", "$api", "$interval", "$auth", function($log, $q, $api, $interval, $auth){
+    alt.factory("$db", ["$log", "$q", "$api", "$interval", "$auth", "$uuid", function($log, $q, $api, $interval, $auth, $uuid){
         var $db = function(url, schema){
             var res = {lf: lf};
             $db.connection = null;
@@ -317,12 +317,14 @@ define([
 
             res.insert = function(param){
                 var data = angular.copy(param || {});
-                if(typeof res.schema.fields.isdeleted !== "undefined" && typeof data.isdeleted === "undefined")
-                    data.isdeleted = false;
 
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
+                    if(typeof res.schema.pkey !== "undefined" && !res.schema.autoinc && typeof data[res.schema.pkey] === "undefined")
+                        data[res.schema.pkey] = $uuid.create();
+                    if(typeof res.schema.fields.isdeleted !== "undefined" && typeof data.isdeleted === "undefined")
+                        data.isdeleted = false;
                     if(typeof res.schema.fields.entrytime !== "undefined")
                         data.entrytime = new Date();
                     if(typeof res.schema.fields.entryuser !== "undefined")

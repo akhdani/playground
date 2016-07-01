@@ -2,11 +2,11 @@
   "name": "playground",
   "version": "1.0.0",
   "dependencies": {
-    "alt-angularjs": "^5.0.14",
+    "alt-angularjs": "^5.1.2",
     "requirejs": "^2.2.0",
     "requirejs-plugins": "^1.0.3",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.6.3",
-    "lovefield": "^2.1.8"
+    "angular-datepicker": "^2.0.3"
   }
 }

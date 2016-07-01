@@ -1,13 +1,61 @@
 define([
 
 ], function(){
-    return ["$scope", "$log", "$timeout", "$rootScope", function($scope, $log, $timeout, $rootScope){
-        $scope.title = "Toolbar Title";
-        $scope.description = "Toolbar Description";
-        $scope.breadcrumb = [{
-            title: "Toolbar"
-        }, {
-            title: "Breadcrumb"
-        }];
+    return ["$scope", "$log", "$interval", "$rootScope", "$timeout", "$routeParams", function($scope, $log, $interval, $rootScope, $timeout, $routeParams){
+        $scope.isshowtoolbar = true;
+        $scope.title = "";
+        $scope.description = "";
+
+        $scope.isshowbreadcrumb = true;
+        $scope.breadcrumb = [];
+
+        $scope.isshowcalendar = true;
+        $scope.moment = moment;
+        $scope.time = moment();
+        $interval(function(){
+            $scope.time = moment();
+        }, 1000);
+
+        $scope.set = function(data){
+            angular.forEach(data, function(val, key){
+                $scope[key] = val;
+            });
+        };
+
+        $scope.reset = function(){
+            $scope.title = "";
+            $scope.description = "";
+            $scope.breadcrumb = [];
+        };
+
+        $scope.breadcrumbs = function(params){
+            params = params || $routeParams;
+            $log.debug(params);
+
+            var breadcrumb = [{title: alt.title}],
+                url = alt.baseUrl;
+
+            angular.forEach([params.altmodule, params.altcontroller, params.altaction], function(val, key){
+                if(typeof val === "undefined" || val == "") return;
+
+                var tmp = (val + "").split("_"),
+                    title = "";
+
+                angular.forEach(tmp, function(val, key){
+                    title += val.charAt(0).toUpperCase() + val.substr(1) + " ";
+                });
+
+                url += val + "/";
+                breadcrumb.push({title: title, href: url});
+            });
+
+            $scope.breadcrumb = breadcrumb;
+            return breadcrumb;
+        };
+        $scope.breadcrumbs();
+
+        $rootScope.$on("$routeChangeStart", function(event, current, prev){
+            $scope.breadcrumbs(current.params);
+        });
     }];
 });

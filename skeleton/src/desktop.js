@@ -1,9 +1,17 @@
 // initialize electron app
+const path = require("path");
 const {app, Menu, Tray, BrowserWindow} = require("electron");
+const app_path = app.getPath("exe").split(path.sep).slice(0, -1).join(path.sep);
 const pkg = require("./package.json");
+const fs = require("fs");
 let client = require("electron-connect").client;
 
 let mainWindow = null;
+
+if(!fs.existsSync(app_path)){
+    fs.mkdirSync(app_path);
+}
+app.setPath("userData", app_path + "/data");
 
 function createWindow () {
     if (mainWindow !== null) return;

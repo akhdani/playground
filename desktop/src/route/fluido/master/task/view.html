@@ -1,0 +1,72 @@
+<div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div data-alt-transclude="alt/table" data-scope="table">
+            <table class="table table-hover table-responsive table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th style="width: 15px;">No.</th>
+                    <th class="text-center" data-ng-click="table.sort('deploymentid')">
+                        Deployment ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['deploymentid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['deploymentid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('processid')">
+                        Process ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['processid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['processid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('taskid')">
+                        Task ID
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['taskid'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['taskid'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('name')">
+                        Name
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['name'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['name'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('documentation')">
+                        Documentation
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['documentation'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['documentation'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('type')">
+                        Type
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['type'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['type'] === false"></i>
+                    </th>
+                    <th class="text-center" data-ng-click="table.sort('subtype')">
+                        Subtype
+                        <i class="fa fa-chevron-up" data-ng-if="table.order['subtype'] === true"></i>
+                        <i class="fa fa-chevron-down" data-ng-if="table.order['subtype'] === false"></i>
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.deploymentid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.processid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.taskid"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.name"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.documentation"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.type"/></td>
+                    <td><input type="text" class="form-control" data-ng-model="table.filter.subtype"/></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in table.data">
+                    <td style="text-align: right;">{{$index + (table.offset || 0) + 1}}.</td>
+                    <td>{{item.deploymentid}}</td>
+                    <td>{{item.processid}}</td>
+                    <td>{{item.taskid}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.documentation}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.subtype}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

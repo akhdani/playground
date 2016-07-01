@@ -1133,80 +1133,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div data-ng-if="['layout3'].indexOf(layout) > -1" class="page-head">
-                    <div class="container">
-                        <div class="page-title">
-                            <h1>Dashboard
-                                <small>dashboard &amp; statistics</small>
-                            </h1>
-                        </div>
-                        <div class="page-toolbar">
-                            <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-                                <i class="fa fa-calendar"></i>&nbsp;
-                                <span class="thin uppercase hidden-xs">May 27, 2016 - June 25, 2016</span>&nbsp;
-                                <i class="fa fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div data-ng-if="['layout1', 'layout2', 'layout4'].indexOf(layout) > -1 && template == 'content'" class="clearfix"></div>
 
             <!-- CONTENT -->
             <div data-ng-class="{'page-container page-content-inner page-container-bg-solid': template == 'content', 'page-content page-content-popup': ['layout6'].indexOf(layout) > -1}">
-                <div data-ng-if="['layout6'].indexOf(layout) > -1" class="page-content-fixed-header">
-                    <!-- BEGIN BREADCRUMBS -->
-                    <ul class="page-breadcrumb">
-                        <li>
-                            <a href="#">Dashboard</a>
-                        </li>
-                        <li>Dashboard</li>
-                    </ul>
-                    <!-- END BREADCRUMBS -->
-                    <div class="content-header-menu">
-                        <!-- BEGIN DROPDOWN AJAX MENU -->
-                        <div class="dropdown-ajax-menu btn-group">
-                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <i class="fa fa-circle"></i>
-                                <i class="fa fa-circle"></i>
-                                <i class="fa fa-circle"></i>
-                            </button>
-                            <ul class="dropdown-menu-v2">
-                                <li>
-                                    <a href="start.html">Application</a>
-                                </li>
-                                <li>
-                                    <a href="start.html">Reports</a>
-                                </li>
-                                <li>
-                                    <a href="start.html">Templates</a>
-                                </li>
-                                <li>
-                                    <a href="start.html">Settings</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- END DROPDOWN AJAX MENU -->
-                        <!-- BEGIN MENU TOGGLER -->
-                        <button type="button" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="toggle-icon">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </span>
-                        </button>
-                        <!-- END MENU TOGGLER -->
-                    </div>
+                <div class="breadcrumbs" data-ng-if="['layout7'].indexOf(layout) > -1">
+                    <div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
                 </div>
-
                 <div data-ng-if="['layout1', 'layout2', 'layout4', 'layout6'].indexOf(layout) > -1 && template == 'content'" class="page-sidebar-wrapper">
                     <div class="page-sidebar navbar-collapse collapse">
-                        <ul class="page-sidebar-menu page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px" data-ng-include="alt.menu" data-onload="menu()"></ul>
+                        <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px" data-ng-include="alt.menu" data-onload="menu()"></ul>
                     </div>
                 </div>
                 <div data-ng-class="{'page-fixed-main-content page-content-wrapper': template == 'content'}">
+                    <div class="page-head" data-ng-if="['layout3'].indexOf(layout) > -1">
+                        <div class="container">
+                            <div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+                        </div>
+                    </div>
+
                     <div data-ng-class="{'page-content': template == 'content' && ['layout1', 'layout2', 'layout3', 'layout4'].indexOf(layout) > -1}">
+                        <div data-ng-if="['layout1', 'layout2', 'layout4'].indexOf(layout) > -1" data-alt-component="alt/toolbar" data-scope="toolbar"></div>
                         <div data-ng-class="{'container': ['layout3'].indexOf(layout) > -1, 'container-fluid': ['layout7'].indexOf(layout) > -1}" data-ng-view="" data-onload="view()"></div>
                     </div>
                 </div>

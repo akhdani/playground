@@ -6,6 +6,7 @@ define([
             var res = {};
 
             // api and database
+            res.schema = schema;
             res.db = $db(url, schema);
             res.api = $api(url, schema.pkey, {
                 connect: function(params){
@@ -30,6 +31,10 @@ define([
             });
 
             // function needed
+            res.quote = function(data){
+                return "'" + data + "'";
+            };
+
             res.count = function(data){
                 return alt.serverUrl ? res.api.count(data) : res.db.count(data);
             };
@@ -81,7 +86,6 @@ define([
         // set order type
         $dbo.ASC = $db.ASC;
         $dbo.DESC = $db.DESC;
-
 
         return $dbo;
     }]);

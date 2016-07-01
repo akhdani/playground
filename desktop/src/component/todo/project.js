@@ -6,8 +6,9 @@ define([
             pkey: "projectid",
             autoinc: true,
             fields: {
-                projectid: $dbo.INTEGER,
-                title: $dbo.STRING
+                projectid: $dbo.STRING,
+                title: $dbo.STRING,
+                total_task: $dbo.NUMBER
             }
         });
 

@@ -14,11 +14,18 @@ const DEFAULT_OPTS = {
     out:   "build/v" + pkg.version,
     "app-version": pkg.version,
     ignore: [
+        ".bowerrc",
+        ".editorconfig",
+        ".gitignore",
         "bower.json",
+        "build.js",
+        "config.xml",
         "gulpfile.js",
+        "ionic.project",
         "/build($|/)",
-        "/script($|/)",
-        "/src($|/)"
+        "/src($|/)",
+        "/www($|/)",
+        "/resources($|/)"
     ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
 };
 

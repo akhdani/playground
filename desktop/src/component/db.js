@@ -1,7 +1,7 @@
 define([
-    "asset/lib/lovefield/dist/lovefield"
+    
 ], function(){
-    alt.factory("$db", ["$log", "$q", "$api", "$interval", function($log, $q, $api, $interval){
+    alt.factory("$db", ["$log", "$q", "$api", "$interval", "$auth", "$uuid", function($log, $q, $api, $interval, $auth, $uuid){
         var $db = function(url, schema){
             var res = {lf: lf};
             $db.connection = null;
@@ -15,13 +15,14 @@ define([
             res.schema.fields = res.schema.fields || [];
             angular.forEach(res.schema.fields, function(val, key){
                 table.addColumn(key, val);
+
+                if(!res.schema.pkey || (res.schema.pkey && key != res.schema.pkey))
+                    table.addNullable([key]);
             });
 
             // set pkey
-            if(res.schema.pkey) {
-                res.schema.pkey = typeof res.schema.pkey === "object" ? res.schema.pkey : [res.schema.pkey];
-                table.addPrimaryKey(res.schema.pkey, res.schema.autoinc);
-            }
+            if(res.schema.pkey)
+                table.addPrimaryKey(typeof res.schema.pkey === "object" ? res.schema.pkey : [res.schema.pkey], res.schema.autoinc);
 
             // set index
             res.schema.index = res.schema.index || [];
@@ -30,8 +31,8 @@ define([
             });
 
             // function needed
-            res.parser = function(data, table){
-                data = data || {};
+            res.parser = function(param, table){
+                var data = angular.copy(param || {});
                 var res = {
                     fields: [],
                     where: [],
@@ -52,6 +53,86 @@ define([
                             });
                             break;
                         case "where":
+                            switch(typeof data.where){
+                                case "string":
+                                    var tmp = data.where.split(" "),
+                                        key = tmp[0] + "",
+                                        operator = tmp[1] + "",
+                                        value = (tmp[2] + "").split("'").join("");
+
+                                    switch(operator.toLowerCase()){
+                                        case "=":
+                                            operator = "eq";
+                                            break;
+                                        case "<>":
+                                            operator = "neq";
+                                            break;
+                                        case ">":
+                                            operator = "gt";
+                                            break;
+                                        case "<":
+                                            operator = "lt";
+                                            break;
+                                        case ">=":
+                                            operator = "gte";
+                                            break;
+                                        case "<=":
+                                            operator = "lte";
+                                            break;
+                                        case "in":
+                                            operator = "in";
+                                            break;
+                                        case "like":
+                                        default:
+                                            operator = "match";
+                                            value = new RegExp(value, "i");
+                                            break;
+                                    }
+
+                                    if(table[key])
+                                        res.where.push(table[key][operator](value));
+                                    break;
+                                case "object":
+                                    angular.forEach(data.where, function(val, key){
+                                        var tmp = val.split(" "),
+                                            key = tmp[0] + "",
+                                            operator = tmp[1] + "",
+                                            value = (tmp[2] + "").split("'").join("");
+
+                                        switch(operator.toLowerCase()){
+                                            case "=":
+                                                operator = "eq";
+                                                break;
+                                            case "<>":
+                                                operator = "neq";
+                                                break;
+                                            case ">":
+                                                operator = "gt";
+                                                break;
+                                            case "<":
+                                                operator = "lt";
+                                                break;
+                                            case ">=":
+                                                operator = "gte";
+                                                break;
+                                            case "<=":
+                                                operator = "lte";
+                                                break;
+                                            case "in":
+                                                operator = "in";
+                                                break;
+                                            case "like":
+                                            default:
+                                                operator = "match";
+                                                value = new RegExp(value, "i");
+                                                break;
+                                        }
+
+                                        if(table[key])
+                                            res.where.push(table[key][operator](value));
+                                    });
+                                    break;
+                            }
                             break;
                         case "limit":
                             res.limit = parseInt(data.limit);
@@ -64,7 +145,7 @@ define([
                             angular.forEach(tmp, function(val, key){
                                 var tmp2 = (val + "").split(" "),
                                     field = val[0],
-                                    sort = val[1].toLowerCase();
+                                    sort = (val[1] + "").toLowerCase();
 
                                 if(table[field]){
                                     res.order.push([table[field], sort == "desc" ? lf.Order.DESC : lf.Order.ASC]);
@@ -76,7 +157,7 @@ define([
                             if(table[key]){
                                 tmp = (val + "").split(" ");
                                 var operator = tmp.length > 1 && ["=", "<>", ">", "<", ">=", "<=", "in", "like"].indexOf(tmp[0]) > -1 ? tmp[0] : "like",
-                                    value = tmp.length > 1 ? (tmp[1] + "").split("'").join("") : tmp[0];
+                                    value = (tmp.length > 1 ? (tmp[1] + "").split("'").join("") : tmp[0]) + "";
 
                                 switch(operator.toLowerCase()){
                                     case "=":
@@ -103,10 +184,11 @@ define([
                                     case "like":
                                     default:
                                         operator = "match";
+                                        value = new RegExp(value, "i");
                                         break;
                                 }
 
-                                res.where.push(table[key][operator](value + ""));
+                                res.where.push(table[key][operator](value));
                             }
                             break;
                     }
@@ -137,8 +219,8 @@ define([
                 return res;
             };
 
-            res.count = function(data){
-                data = data || {};
+            res.count = function(param){
+                var data = angular.copy(param || {});
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
@@ -162,8 +244,11 @@ define([
                 return deferred.promise;
             };
 
-            res.list = function(data){
-                data = data || {};
+            res.list = function(param){
+                var data = angular.copy(param || {});
+                if(typeof res.schema.fields.isdeleted !== "undefined")
+                    data.isdeleted = data.isdeleted || false;
+
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
@@ -194,8 +279,8 @@ define([
                 return deferred.promise;
             };
 
-            res.keyvalues = function(data){
-                data = data || {};
+            res.keyvalues = function(param){
+                var data = angular.copy(param || {});
                 var deferred = $q.defer(),
                     result = {status: 200, data: {}};
 
@@ -212,8 +297,8 @@ define([
                 return deferred.promise;
             };
 
-            res.table = function(data){
-                data = data || {};
+            res.table = function(param){
+                var data = angular.copy(param || {});
                 var deferred = $q.defer(),
                     result = {status: 200, data: {}};
 
@@ -230,11 +315,21 @@ define([
                 return deferred.promise;
             };
 
-            res.insert = function(data){
-                data = data || {};
+            res.insert = function(param){
+                var data = angular.copy(param || {});
+
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
+                    if(typeof res.schema.pkey !== "undefined" && !res.schema.autoinc && typeof data[res.schema.pkey] === "undefined")
+                        data[res.schema.pkey] = $uuid.create();
+                    if(typeof res.schema.fields.isdeleted !== "undefined" && typeof data.isdeleted === "undefined")
+                        data.isdeleted = false;
+                    if(typeof res.schema.fields.entrytime !== "undefined")
+                        data.entrytime = new Date();
+                    if(typeof res.schema.fields.entryuser !== "undefined")
+                        data.entryuser = $auth.userdata.username;
+
                     var table = $db.connection.getSchema().table(res.tablename),
                         row = table.createRow(data);
 
@@ -248,11 +343,16 @@ define([
                 return deferred.promise;
             };
 
-            res.update = function(data){
-                data = data || {};
+            res.update = function(param){
+                var data = angular.copy(param || {});
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
+                    if(typeof res.schema.fields.modifiedtime !== "undefined")
+                        data.modifiedtime = new Date();
+                    if(typeof res.schema.fields.modifieduser !== "undefined")
+                        data.modifieduser = $auth.userdata.username;
+
                     var table = $db.connection.getSchema().table(res.tablename),
                         parser = res.parser({where: data.where || ""}, table),
                         query;
@@ -282,11 +382,11 @@ define([
                 return deferred.promise;
             };
 
-            res.retrieve = function(data){
-                data = data || {};
+            res.retrieve = function(param){
+                var data = angular.copy(param || {});
                 data.limit = 1;
                 if(data[res.schema.pkey])
-                    data[res.schema.pkey] = "= " + data[res.schema.pkey];
+                    data[res.schema.pkey] = (data[res.schema.pkey] + "").indexOf("=") == 0 ? data[res.schema.pkey] : "= " + data[res.schema.pkey];
 
                 var deferred = $q.defer();
 
@@ -303,17 +403,28 @@ define([
                 return deferred.promise;
             };
 
-            res.remove = function(data){
-                data = data || {};
+            res.remove = function(param){
+                var data = angular.copy(param || {});
+
+                if(typeof res.schema.pkey !== "undefined" && typeof data[res.schema.pkey] !== "undefined")
+                    data[res.schema.pkey] = (data[res.schema.pkey] + "").indexOf("=") == 0 ? data[res.schema.pkey] : "= " + data[res.schema.pkey];
+
                 var deferred = $q.defer();
 
                 $db.connect().then(function(){
                     var table = $db.connection.getSchema().table(res.tablename),
-                        parser = res.parser({where: data.where || ""}, table),
+                        parser = res.parser(data, table),
                         query;
 
-                    // select
-                    query = $db.connection.delete.from(table);
+                    if(typeof res.schema.fields.deletedtime !== "undefined")
+                        data.deletedtime = new Date();
+                    if(typeof res.schema.fields.deleteduser !== "undefined")
+                        data.deleteduser = $auth.userdata.username;
+                    if(typeof res.schema.fields.isdeleted !== "undefined")
+                        data.isdeleted = true;
+
+                    // delete or update
+                    query = res.schema.fields.isdeleted ? $db.connection.update(table) : $db.connection.delete().from(table);
 
                     if(parser.where){
                         query.where(parser.where);
@@ -331,8 +442,8 @@ define([
                 return deferred.promise;
             };
 
-            res.isexist = function(data){
-                data = data || {};
+            res.isexist = function(param){
+                var data = angular.copy(param || {});
                 var deferred = $q.defer();
 
                 res.count(data).then(function(response){

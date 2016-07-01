@@ -1,9 +1,7 @@
 {
-  "name": "prototyper",
+  "name": "playground",
   "version": "1.0.0",
   "main": "desktop.js",
   "dependencies": {
-    "copy-dir": "0.0.8",
-    "nedb": "^1.8.0"
   }
 }

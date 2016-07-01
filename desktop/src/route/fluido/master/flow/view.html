@@ -1,0 +1,62 @@
+<div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+
+<div data-alt-transclude="alt/table" data-scope="table" style="overflow-x: auto">
+    <table class="table table-hover table-responsive table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th style="width: 15px;">No.</th>
+                <th style="width: 150px;" class="text-center" data-ng-click="table.sort('deploymentid')">
+                    Deployment ID
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['deploymentid'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['deploymentid'] === false"></i>
+                </th>
+                <th class="text-center" data-ng-click="table.sort('processid')">
+                    Process ID
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['processid'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['processid'] === false"></i>
+                </th>
+                <th class="text-center" data-ng-click="table.sort('flowid')">
+                    Flow ID
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['flowid'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['flowid'] === false"></i>
+                </th>
+                <th class="text-center" data-ng-click="table.sort('source')">
+                    Source
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['source'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['source'] === false"></i>
+                </th>
+                <th class="text-center" data-ng-click="table.sort('target')">
+                    Target
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['target'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['target'] === false"></i>
+                </th>
+                <th class="text-center" data-ng-click="table.sort('expression')">
+                    Expression
+                    <i class="fa fa-chevron-up" data-ng-if="table.order['expression'] === true"></i>
+                    <i class="fa fa-chevron-down" data-ng-if="table.order['expression'] === false"></i>
+                </th>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.deploymentid"/></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.processid"/></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.flowid"/></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.source"/></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.target"/></td>
+                <td><input type="text" class="form-control" data-ng-model="table.filter.expression"/></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="item in table.data">
+                <td style="text-align: right;">{{$index + (table.offset || 0) + 1}}.</td>
+                <td>{{item.deploymentid}}</td>
+                <td>{{item.processid}}</td>
+                <td>{{item.flowid}}</td>
+                <td>{{item.source}}</td>
+                <td>{{item.target}}</td>
+                <td>{{item.expression}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
