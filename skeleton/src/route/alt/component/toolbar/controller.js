@@ -2,20 +2,36 @@ define([
 
 ], function(){
     return ["$scope", "$alert", "$rootScope", function($scope, $alert, $rootScope){
-        $rootScope.theme.toolbar = {
-            title: "Toolbar",
-            description: "display toolbar and breadcrumb",
+        $scope.toolbar1 = {
+            isshowtoolbar: false,
             breadcrumb: [{
-                title: "Alt"
+                title: "Breadcrumb"
             }, {
-                title: "UI Features"
-            }, {
-                title: "Toolbar"
+                title: "Calendar Only"
             }]
         };
 
-        $scope.toolbar1 = {
-            isshowbreadcrumb: false
+        $scope.toolbar2 = {
+            isshowpagebar: false,
+            title: "Toolbar Title 1",
+            description: "without pagebar (breadcrumb and calendar)"
+        };
+
+        $scope.toolbar3 = {
+            isshowbreadcrumb: false,
+            title: "Toolbar Title 2",
+            description: "without breadcrumb"
+        };
+
+        $scope.toolbar4 = {
+            isshowcalendar: false,
+            title: "Toolbar Title 3",
+            description: "without calendar",
+            breadcrumb: [{
+                title: "Breadcrumb 1"
+            }, {
+                title: "Breadcrumb 2"
+            }]
         };
     }];
 });

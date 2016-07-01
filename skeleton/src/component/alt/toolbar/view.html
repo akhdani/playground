@@ -1,4 +1,4 @@
-<div class="page-bar">
+<div class="page-bar" data-ng-if="isshowpagebar">
     <ul class="page-breadcrumb" data-ng-if="isshowbreadcrumb">
         <li data-ng-repeat="item in breadcrumb">
             <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>

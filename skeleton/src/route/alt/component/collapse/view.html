@@ -1,3 +1,29 @@
-<div data-ng-repeat="item in alert">
-    <div data-alt-transclude="alt/alert" data-scope="item"><span data-ng-bind="item.message"></span></div>
+<div data-alt-transclude="alt/collapse" data-scope="collapse">
+    <div data-alt-transclude="alt/collapse/panel" data-scope="collapse" data-id="0">
+        Content of Panel 1
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="collapse" data-id="1">
+        Content of Panel 2
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="collapse" data-id="2">
+        Content of Panel 3
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="collapse" data-id="3">
+        Content of Panel 4
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="collapse" data-id="4">
+        Content of Panel 5
+    </div>
+</div>
+
+<div data-alt-transclude="alt/collapse" data-scope="accordion">
+    <div data-alt-transclude="alt/collapse/panel" data-scope="accordion" data-id="0">
+        Content of Panel 1
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="accordion" data-id="1">
+        Content of Panel 2
+    </div>
+    <div data-alt-transclude="alt/collapse/panel" data-scope="accordion" data-id="2">
+        Content of Panel 3
+    </div>
 </div>

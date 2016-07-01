@@ -1139,7 +1139,7 @@
             <!-- CONTENT -->
             <div data-ng-class="{'page-container page-content-inner page-container-bg-solid': template == 'content', 'page-content page-content-popup': ['layout6'].indexOf(layout) > -1}">
                 <div class="breadcrumbs" data-ng-if="['layout7'].indexOf(layout) > -1">
-                    <div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+                    <div data-alt-component="alt/toolbar" data-scope="pagebar"></div>
                 </div>
                 <div data-ng-if="['layout1', 'layout2', 'layout4', 'layout6'].indexOf(layout) > -1 && template == 'content'" class="page-sidebar-wrapper">
                     <div class="page-sidebar navbar-collapse collapse">
@@ -1149,12 +1149,12 @@
                 <div data-ng-class="{'page-fixed-main-content page-content-wrapper': template == 'content'}">
                     <div class="page-head" data-ng-if="['layout3'].indexOf(layout) > -1">
                         <div class="container">
-                            <div data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+                            <div data-alt-component="alt/toolbar" data-scope="pagebar"></div>
                         </div>
                     </div>
 
                     <div data-ng-class="{'page-content': template == 'content' && ['layout1', 'layout2', 'layout3', 'layout4'].indexOf(layout) > -1}">
-                        <div data-ng-if="['layout1', 'layout2', 'layout4'].indexOf(layout) > -1" data-alt-component="alt/toolbar" data-scope="toolbar"></div>
+                        <div data-ng-if="['layout1', 'layout2', 'layout4'].indexOf(layout) > -1" data-alt-component="alt/toolbar" data-scope="pagebar"></div>
                         <div data-ng-class="{'container': ['layout3'].indexOf(layout) > -1, 'container-fluid': ['layout7'].indexOf(layout) > -1}" data-ng-view="" data-onload="view()"></div>
                     </div>
                 </div>

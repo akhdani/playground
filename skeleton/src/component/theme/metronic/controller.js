@@ -6,7 +6,7 @@ define([
         $scope.color = "default";
         $scope.template = "full";
 
-        $scope.toolbar = {};
+        $scope.pagebar = {};
 
         $scope.onload = function(){
             $("body").addClass("page-header-fixed page-sidebar-closed-hide-logo page-content-white");

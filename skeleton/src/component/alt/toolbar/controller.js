@@ -2,6 +2,8 @@ define([
 
 ], function(){
     return ["$scope", "$log", "$interval", "$rootScope", "$timeout", "$routeParams", function($scope, $log, $interval, $rootScope, $timeout, $routeParams){
+        $scope.isshowpagebar = true;
+
         $scope.isshowtoolbar = true;
         $scope.title = "";
         $scope.description = "";
@@ -29,8 +31,14 @@ define([
         };
 
         $scope.breadcrumbs = function(params){
-            params = params || $routeParams;
-            $log.debug(params);
+            if(typeof params === "undefined"){
+                params = params || $routeParams;
+
+                var hash = (window.location.hash + "").replace(alt.baseUrl, "").split("/");
+                if(hash.length > 0 && Object.keys($routeParams) == 0){
+                    params.altaction = hash[0];
+                }
+            }
 
             var breadcrumb = [{title: alt.title}],
                 url = alt.baseUrl;
