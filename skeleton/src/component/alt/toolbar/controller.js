@@ -2,6 +2,7 @@ define([
 
 ], function(){
     return ["$scope", "$log", "$interval", "$rootScope", "$timeout", "$routeParams", function($scope, $log, $interval, $rootScope, $timeout, $routeParams){
+        $scope.theme = $rootScope.theme.name;
         $scope.isshowpagebar = true;
 
         $scope.isshowtoolbar = true;

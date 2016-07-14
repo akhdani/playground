@@ -1,5 +1,5 @@
 define([
-    "component/alt/button/service"
+    
 ], function () {
     return ["$scope", "$log", "$rootScope", "$button", "$popup", function ($scope, $log, $rootScope, $button, $popup) {
         $scope.response = {
@@ -19,7 +19,6 @@ define([
                 }
             }),
             $button("yes", {
-                // class: "btn btn-success pull-right",
                 title: "Yes",
                 onclick: function(){
                     $popup.close(true);

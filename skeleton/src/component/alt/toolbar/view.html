@@ -1,22 +1,62 @@
-<div class="page-bar" data-ng-if="isshowpagebar">
-    <ul class="page-breadcrumb" data-ng-if="isshowbreadcrumb">
-        <li data-ng-repeat="item in breadcrumb">
-            <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>
-            <span data-ng-if="item.isactive">{{ item.title }}</span>
-            <i data-ng-if="!$last" class="fa fa-chevron-right"></i>
-        </li>
-    </ul>
-    <div class="page-toolbar" data-ng-if="isshowcalendar">
-        <div class="pull-right">
-            <span class="thin uppercase hidden-xs">{{ moment(time).format("DD MMMM YYYY, HH:mm:ss") }}</span>&nbsp;
-            <i class="fa fa-calendar"></i>
+<div data-ng-switch="theme">
+    <div data-ng-switch-when="adminlte">
+        <section class="content-header" data-ng-if="isshowpagebar">
+            <h1 data-ng-if="isshowtoolbar">
+                {{ title }}
+                <small>{{ description }}</small>
+            </h1>
+            <ol class="breadcrumb" data-ng-if="isshowbreadcrumb">
+                <li data-ng-repeat="item in breadcrumb" data-ng-class="{true: 'active'}[item.isactive]">
+                    <a data-ng-if="!item.isactive" data-ng-href="{{ alt.baseUrl + item.url }}">
+                        {{ item.title }}
+                    </a>
+                    <span data-ng-if="item.isactive">{{ item.title }}</span>
+                </li>
+            </ol>
+        </section>
+    </div>
+
+    <div data-ng-switch-when="metronic">
+        <div class="page-bar" data-ng-if="isshowpagebar">
+            <ul class="page-breadcrumb" data-ng-if="isshowbreadcrumb">
+                <li data-ng-repeat="item in breadcrumb">
+                    <a data-ng-if="!item.isactive" data-ng-href="{{ item.url }}">{{ item.title }}</a>
+                    <span data-ng-if="item.isactive">{{ item.title }}</span>
+                    <i data-ng-if="!$last" class="fa fa-chevron-right"></i>
+                </li>
+            </ul>
+            <div class="page-toolbar" data-ng-if="isshowcalendar">
+                <div class="pull-right">
+                    <span class="thin uppercase hidden-xs">{{ moment(time).format("DD MMMM YYYY, HH:mm:ss") }}</span>&nbsp;
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="page-title" data-ng-if="isshowtoolbar">
+            <h1>
+                {{ title }}
+                <small>{{ description }}</small>
+            </h1>
         </div>
     </div>
-</div>
 
-<div class="page-title" data-ng-if="isshowtoolbar">
-    <h1>
-        {{ title }}
-        <small>{{ description }}</small>
-    </h1>
+    <div data-ng-switch-when="gentellela">
+        <section id="page-title" class="row" data-ng-if="isshowpagebar">
+            <div class="col-md-6">
+                <h1 data-ng-if="isshowtoolbar">{{ title }}</h1>
+                <p data-ng-if="isshowtoolbar" class="lead">{{ description }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <ol class="breadcrumb pull-right no-margin-bottom" data-ng-if="isshowbreadcrumb">
+                    <li data-ng-repeat="item in breadcrumb" data-ng-class="{true: 'active'}[item.isactive]">
+                        <a data-ng-if="!item.isactive" data-ng-href="{{ alt.baseUrl + item.url }}">
+                            {{ item.title }}
+                        </a>
+                        <span data-ng-if="item.isactive">{{ item.title }}</span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </div>
 </div>

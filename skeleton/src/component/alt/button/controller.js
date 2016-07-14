@@ -1,5 +1,5 @@
 define([
-    "component/alt/button/service"
+
 ], function(){
     return ["$scope", "$log", "$button", "$rootScope", "$element", function($scope, $log, $button, $rootScope, $element){
         $scope.title = "";

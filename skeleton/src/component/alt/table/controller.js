@@ -36,6 +36,7 @@ define([
         $scope.pager = [];
         $scope.isshowpagination = true;
         $scope.isshowviewdata = true;
+        $scope.isshowfilter = true;
 
         // watch total data, on data dummy or server side send all data
         $scope.$watch("total_data", function(newvalue, oldvalue){

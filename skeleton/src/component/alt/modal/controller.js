@@ -1,7 +1,7 @@
 define([
-    "component/alt/button/service"
+
 ], function(){
-    return ["$scope", "$log", "$button", "$rootScope", function($scope, $log, $button, $rootScope){
+    return ["$scope", "$log", "$button", function($scope, $log, $button){
         $scope.isshow = false;
         $scope.style = "";
 

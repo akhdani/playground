@@ -2,19 +2,31 @@ alt.application = "playground-skeleton";
 alt.title = "Playground Skeleton";
 alt.description = "Playground Skeleton Application";
 
-alt.run(["$rootScope", "$log", "$loading", "$timeout", function($rootScope, $log, $loading, $timeout){
+alt.run(["$rootScope", "$log", "$window", "$interval", function($rootScope, $log, $window, $interval){
     moment.locale("id");
 
     $rootScope.theme = {
-        layout: "layout1",
-        color: "default",
-        template: "content"
+        // adminlte
+        // skin: "blue",
+
+        // metronic
+        /*layout: "layout5",
+         skin: "default",
+         template: "content"*/
     };
 
     $rootScope.$on("$routeChangeStart", function(event, current, next){
-        if(current.params && current.params.altmodule == "fluido")
-            alt.menu = "menu/fluido.html";
-        if(current.params && [current.params.altmodule, current.params.altcontroller, current.params.altaction].indexOf("alt") > -1)
-            alt.menu = "menu/alt.html";
+        var interval = $interval(function(){
+            if($rootScope.theme.name) {
+                $interval.cancel(interval);
+                alt.menu = "menu/" + $rootScope.theme.name + ".html";
+
+                if(current.params.altmodule != $rootScope.theme.name) {
+                    $window.location.href = alt.baseUrl + $rootScope.theme.name + "/" + (current.params.altcontroller || "dashboard") + "/" + (current.params.altaction || "1");
+                }else{
+                    $rootScope.theme.onload();
+                }
+            }
+        }, 100);
     });
 }]);

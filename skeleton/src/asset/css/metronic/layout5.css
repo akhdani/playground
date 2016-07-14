@@ -1214,3 +1214,7 @@ Quick Sidebar Layout
         margin-top: -4px; }
       .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-settings .page-quick-sidebar-settings-list .list-items li select.form-control {
         padding: 4px 0px !important; }
+
+.page-footer{
+  color: white;
+}

@@ -5,6 +5,7 @@ define([
         $scope.panes = [{title: "Pills", isactive: false}];
         $scope.current = 0;
         $scope.onselect = angular.noop;
+
         $scope.select = function(stepid){
             var previd = $scope.current;
             angular.forEach($scope.panes, function(value, key){
@@ -18,6 +19,11 @@ define([
         };
 
         $timeout(function(){
+            angular.forEach($scope.panes, function(val, key){
+                $scope.panes[key].isshow = typeof $scope.panes[key].isshow === "undefined" ? true : $scope.panes[key].isshow;
+                $scope.panes[key].isactive = typeof $scope.panes[key].isactive === "undefined" ? false : $scope.panes[key].isactive;
+            });
+
             $scope.select(0);
         });
     }];

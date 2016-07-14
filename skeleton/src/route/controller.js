@@ -1,7 +1,7 @@
 define([
 
 ], function(){
-    return ["$scope", "$log", "$rootScope", function($scope, $log, $rootScope){
+    return ["$scope", "$log", function($scope, $log){
 
     }];
 });

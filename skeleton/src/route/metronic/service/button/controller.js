@@ -1,0 +1,52 @@
+define([
+
+], function(){
+    return ["$scope", "$button", function($scope, $button){
+        $scope.button = [
+            $button("add"),
+            $button("save"),
+            $button("cancel"),
+            $button("back"),
+            $button("reload"),
+            $button("map"),
+            $button("login"),
+            $button("excel"),
+            $button("reset"),
+            $button("sub"),
+            $button("print"),
+            $button("email"),
+            $button("view"),
+            $button("edit"),
+            $button("remove"),
+            $button("yes"),
+            $button("no"),
+            $button("cancel"),
+            $button("verification"),
+            $button("approve"),
+            $button("reject"),
+            $button("search"),
+            $button("preview"),
+            $button("open"),
+            $button("close"),
+            $button("next"),
+            $button("preview"),
+            $button("zoomin"),
+            $button("zoomout"),
+            $button("start"),
+            $button("finish"),
+            $button("choose"),
+            $button("unchoose"),
+            $button("up"),
+            $button("down"),
+            $button("generate"),
+            $button("money"),
+            $button("barcode"),
+            $button("qrcode"),
+            $button("import"),
+            $button("export"),
+            $button("upload"),
+            $button("download"),
+            $button("history")
+        ];
+    }];
+});
