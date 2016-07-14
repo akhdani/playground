@@ -4,7 +4,8 @@ return array (
     "app" => array(
         "id" => "playground",
         "name" => "Playground Server",
-        "environment" => "production",
+        "environment" => "development",
+//        "environment" => "production",
     ),
     "log" => array(
         "level" => 5,

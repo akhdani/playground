@@ -1,8 +1,0 @@
-<div class="tabbable-line boxless tabbable-reversed">
-    <ul class="nav nav-tabs">
-        <li data-ng-repeat="t in this[$attrs.scope].tabs" data-ng-show="t.isshow" data-ng-class="{active: t.selected}">
-            <a href="javascript:;" data-ng-click="this[$attrs.scope].select(t)">{{ t.title }}</a>
-        </li>
-    </ul>
-    <div data-ng-transclude="data-ng-transclude" class="tab-content"></div>
-</div>

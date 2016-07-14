@@ -15,6 +15,7 @@
     "cross-env": "^1.0.7",
     "electron-packager": "^7.0.1",
     "electron-prebuilt": "1.0.1",
+    "electron-connect": "^0.4.2",
     "glob": "^7.0.0",
     "gulp": "^3.9.0",
     "gulp-bower": "^0.0.10",
@@ -31,7 +32,6 @@
     "playground"
   ],
   "dependencies": {
-    "electron-connect": "^0.4.2"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",

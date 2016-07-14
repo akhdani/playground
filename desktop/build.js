@@ -18,6 +18,7 @@ const DEFAULT_OPTS = {
         ".editorconfig",
         ".gitignore",
         "bower.json",
+        "bs-config.js",
         "build.js",
         "config.xml",
         "gulpfile.js",
@@ -25,7 +26,7 @@ const DEFAULT_OPTS = {
         "/build($|/)",
         "/src($|/)",
         "/www($|/)",
-        "/resources($|/)",
+        "/resources($|/)"
     ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
 };
 

@@ -7,13 +7,18 @@ class Playground_Application extends Alt_Dbo {
         parent::__construct();
 
         // define this class specific properties
+        $this->label        = "Aplikasi";
         $this->pkey         = "applicationid";
         $this->table_name   = "play_application";
         $this->table_fields = array(
             "applicationid" => "",
+            "code"          => "",
             "name"          => "",
             "description"   => "",
-            "url"           => "",
+            "version"       => "",
+            "counter"       => "",
+            "categoryid"    => "",
+            "isdisplayed"   => "",
             "entrytime"     => "",
             "entryuser"     => "",
             "modifiedtime"  => "",

@@ -4,12 +4,15 @@ const {app, Menu, Tray, BrowserWindow} = require("electron");
 const pkg = require("./package.json");
 const app_path = app.getPath("exe").replace(pkg.name.charAt(0).toUpperCase() + pkg.name.substr(1) + ".exe", "");
 const fs = require("fs");
-let client = require("electron-connect").client;
 
 let mainWindow = null;
 
 app.setPath("userData", app_path + "/data");
-global.app_path = app_path;
+global.path = {
+    folder: app_path,
+    resources: app_path + "resources/",
+    asar: app_path + "resources/app.asar/app/"
+};
 
 function createWindow () {
     if (mainWindow !== null) return;
@@ -28,9 +31,6 @@ function createWindow () {
         icon: `${__dirname}/favicon.ico`
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
-
-    // Connect to server process
-    client.create(mainWindow);
 
     // additional window configuration
     mainWindow.setMenu(null);
